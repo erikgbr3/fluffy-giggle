@@ -22,11 +22,25 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+import club from './club';
+import foulcard from './foulcard';
+import goalscore from './goalscore';
 import league from './league';
+import match from './match';
+import player from './player';
+import role from './role';
+import sportfield from './sportfield';
 import suscription from './suscription';
 import user from './user';
 
+db.Club = club(sequelize, Sequelize.DataTypes);
+db.FoulCard = foulcard(sequelize, Sequelize.DataTypes);
+db.GoalScore = goalscore(sequelize, Sequelize.DataTypes);
 db.League = league(sequelize, Sequelize.DataTypes);
+db.Match = match(sequelize, Sequelize.DataTypes);
+db.Player = player(sequelize, Sequelize.DataTypes);
+db.Role = role(sequelize, Sequelize.DataTypes);
+db.SportField = sportfield(sequelize, Sequelize.DataTypes);
 db.Suscription = suscription(sequelize, Sequelize.DataTypes);
 db.User = user(sequelize, Sequelize.DataTypes);
 db.sequelize = sequelize;
