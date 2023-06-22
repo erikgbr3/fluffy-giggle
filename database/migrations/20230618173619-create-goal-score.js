@@ -9,7 +9,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      playerId: {
+        type: Sequelize.INTEGER
+      },
       score: {
+        type: Sequelize.INTEGER
+      },
+      matchId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

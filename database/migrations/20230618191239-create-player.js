@@ -30,6 +30,9 @@ module.exports = {
       curp: {
         type: Sequelize.STRING
       },
+      clubId: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

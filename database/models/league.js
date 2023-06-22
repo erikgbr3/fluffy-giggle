@@ -11,13 +11,37 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.League.belongsTo(models.User,
+        {
+          as: 'user',
+          foreignKey: 'ownwerId',
+        }  
+      );
+      models.League.hasMany(models.Suscription,
+        {
+          as: 'suscription',
+          foreignKey: 'leagueId',
+        }  
+      );
+      models.League.hasMany(models.Match,
+        {
+          as: 'match',
+          foreignKey: 'leagueId',
+        }  
+      );
+      models.League.hasOne(models.PositionTableLeague,
+        {
+          as: 'position',
+          foreignKey: 'leagueId',
+        }  
+      );
     }
   }
   League.init({
     name: DataTypes.STRING,
     cost: DataTypes.INTEGER,
     prize: DataTypes.STRING,
-    init: DataTypes.DATE,
+    init: DataTypes.STRING,
     description: DataTypes.TEXT,
     ownerId: DataTypes.INTEGER
   }, {

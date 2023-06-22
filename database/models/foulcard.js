@@ -11,9 +11,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.FoulCard.belongsTo(models.Player,
+        {
+          as: 'player',
+          foreignKey: 'playerId',
+        }  
+      );
+      models.FoulCard.belongsTo(models.Match,
+        {
+          as: 'match',
+          foreignKey: 'matchId',
+        }  
+      );
     }
   }
   FoulCard.init({
+    playerId: DataTypes.INTEGER,
+    matchId: DataTypes.INTEGER,
     color: DataTypes.STRING
   }, {
     sequelize,

@@ -11,6 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Suscripton.belongsTo(models.League,
+        {
+          as: 'league',
+          foreignKey: 'leagueId',
+        }  
+      );
+      models.Suscripton.belongsTo(models.Club,
+        {
+          as: 'club',
+          foreignKey: 'leagueId',
+        }  
+      );
     }
   }
   Suscription.init({
