@@ -11,6 +11,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Player.belongsTo(models.Club,
+        {
+          as: 'club',
+          foreignKey: 'clubId',
+        }  
+      );
+      models.Player.hasMany(models.GoalScore,
+        {
+          as: 'goalscore',
+          foreignKey: 'playerId',
+        }  
+      );
+      models.FoulCard.hasMany(models.FoulCard,
+        {
+          as: 'foulcard',
+          foreignKey: 'playerId',
+        }  
+      );
     }
   }
   Player.init({
@@ -20,7 +38,8 @@ module.exports = (sequelize, DataTypes) => {
     numberjersey: DataTypes.STRING,
     position: DataTypes.STRING,
     cellphone: DataTypes.STRING,
-    curp: DataTypes.STRING
+    curp: DataTypes.STRING,
+    clubId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Player',

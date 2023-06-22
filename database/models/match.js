@@ -11,6 +11,36 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Match.belongsTo(models.Club,
+        {
+          as: 'club',
+          foreignKey: 'homeTeamId',
+        }  
+      );
+      models.Match.belongsTo(models.Club,
+        {
+          as: 'clubs',
+          foreignKey: 'visitorTeamId',
+        }  
+      );
+      models.Match.belongsTo(models.League,
+        {
+          as: 'league',
+          foreignKey: 'leagueId',
+        }  
+      );
+      models.Match.hasMany(models.GoalScore,
+        {
+          as: 'goalscore',
+          foreignKey: 'matchId',
+        }  
+      );
+      models.Match.hasMany(models.FoulCard,
+        {
+          as: 'foulcard',
+          foreignKey: 'matchId',
+        }  
+      );
     }
   }
   Match.init({

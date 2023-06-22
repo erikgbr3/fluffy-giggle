@@ -9,6 +9,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      playerId: {
+        type: Sequelize.INTEGER
+      },
+      matchId: {
+        type: Sequelize.INTEGER
+      },
       color: {
         type: Sequelize.STRING
       },

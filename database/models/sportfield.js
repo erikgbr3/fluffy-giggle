@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.SportField.hasOne(models.Club,
+        {
+          as: 'club',
+          foreignKey: 'fieldId',
+        }  
+      );
     }
   }
   SportField.init({
