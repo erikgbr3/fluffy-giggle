@@ -48,8 +48,8 @@ module.exports = (sequelize, DataTypes) => {
     scoreHome: DataTypes.INTEGER,
     visitorTeamId: DataTypes.INTEGER,
     scoreVisitor: DataTypes.INTEGER,
-    date: DataTypes.DATE,
-    hour: DataTypes.TIME,
+    date: DataTypes.STRING,
+    hour: DataTypes.STRING,
     leagueId: DataTypes.INTEGER,
     refereeId: DataTypes.INTEGER
   }, {
