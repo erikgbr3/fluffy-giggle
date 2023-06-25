@@ -13,19 +13,21 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       scoreHome: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       visitorTeamId: {
         type: Sequelize.INTEGER
       },
       scoreVisitor: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       date: {
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       hour: {
-        type: Sequelize.TIME
+        type: Sequelize.STRING
       },
       leagueId: {
         type: Sequelize.INTEGER
