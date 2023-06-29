@@ -9,19 +9,6 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
-
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
-
 import club from './club';
 import foulcard from './foulcard';
 import goalscore from './goalscore';
@@ -33,6 +20,13 @@ import role from './role';
 import sportfield from './sportfield';
 import suscription from './suscription';
 import user from './user';
+
+let sequelize;
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
 
 db.Club = club(sequelize, Sequelize.DataTypes);
 db.FoulCard = foulcard(sequelize, Sequelize.DataTypes);
@@ -47,5 +41,11 @@ db.Suscription = suscription(sequelize, Sequelize.DataTypes);
 db.User = user(sequelize, Sequelize.DataTypes);
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
 
 module.exports = db;

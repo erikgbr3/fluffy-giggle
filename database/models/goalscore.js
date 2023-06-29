@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: 'matchId',
         }  
       );
-    }
+    } 
   }
   GoalScore.init({
     playerId: DataTypes.INTEGER,

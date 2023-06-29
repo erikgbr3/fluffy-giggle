@@ -37,7 +37,7 @@ const getLeague = async (req, res) => {
             });
         }
 
-        return res.json(cities);
+        return res.json(leagues);
     } catch(error){
         console.log(error);
         let errors = [];
