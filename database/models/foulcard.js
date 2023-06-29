@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         {
           as: 'match',
           foreignKey: 'matchId',
-        }  
+        }   
       );
     }
   }

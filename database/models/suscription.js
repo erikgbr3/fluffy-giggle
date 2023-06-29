@@ -11,16 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Suscripton.belongsTo(models.League,
+      models.Suscription.belongsTo(models.League,
         {
           as: 'league',
           foreignKey: 'leagueId',
         }  
       );
-      models.Suscripton.belongsTo(models.Club,
+      models.Suscription.belongsTo(models.Club,
         {
           as: 'club',
-          foreignKey: 'leagueId',
+          foreignKey: 'clubId',
         }  
       );
     }

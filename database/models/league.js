@@ -11,12 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.League.belongsTo(models.User,
+      models.League.belongsTo(models.User, 
         {
-          as: 'user',
-          foreignKey: 'ownwerId',
-        }  
-      );
+        as: 'user',
+        foreignKey: 'ownerId', 
+      });
       models.League.hasMany(models.Suscription,
         {
           as: 'suscription',

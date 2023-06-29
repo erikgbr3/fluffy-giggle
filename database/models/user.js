@@ -15,13 +15,13 @@ module.exports = (sequelize, DataTypes) => {
       models.User.belongsTo(models.Role,
         {
           as: 'role',
-          foreignKey: 'stateId',
+          foreignKey: 'roleId',
         }  
       );
       models.User.hasMany(models.League,
         {
           as: 'leagues',
-          foreignKey: 'ownwerId',
+          foreignKey: 'ownerId',
         }  
       );
     }

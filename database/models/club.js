@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         {
           as: 'suscription',
           foreignKey: 'clubId',
-        }  
+        }   
       );
       models.Club.belongsTo(models.SportField,
         {
