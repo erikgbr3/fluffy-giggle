@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         {
           as: 'club',
           foreignKey: 'clubId',
-        }  
+        }   
       );
       models.Player.hasMany(models.GoalScore,
         {

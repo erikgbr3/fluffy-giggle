@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       models.League.hasMany(models.Match,
         {
           as: 'match',
-          foreignKey: 'leagueId',
+          foreignKey: 'leagueId', 
         }  
       );
       models.League.hasOne(models.PositionTableLeague,
