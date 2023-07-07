@@ -16,7 +16,11 @@ module.exports = {
         type: Sequelize.STRING
       },
       fieldId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'SportFields',
+          key: 'id'
+        }
       },
       ownerTeamId: {
         type: Sequelize.INTEGER

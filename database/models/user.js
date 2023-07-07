@@ -65,7 +65,9 @@ module.exports = (sequelize, DataTypes) => {
       passwordResetToken: DataTypes.STRING(128),
       passwordResetExpire: DataTypes.BIGINT
     },
-    roleId: DataTypes.INTEGER
+    roleId: DataTypes.INTEGER,
+    passwordResetToken: DataTypes.STRING(128),
+    passwordResetExpire: DataTypes.BIGINT,
   }, {
     sequelize,
     modelName: 'User',
