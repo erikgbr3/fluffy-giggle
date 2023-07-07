@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       models.GoalScore.belongsTo(models.Match,
         {
           as: 'match',
-          foreignKey: 'matchId',
+          foreignKey: 'matchId', 
         }  
       );
     } 

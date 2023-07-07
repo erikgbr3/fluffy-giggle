@@ -10,14 +10,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       homeTeamId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Clubs',
+          key: 'id'
+        }
       },
       scoreHome: {
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
       visitorTeamId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Clubs',
+          key: 'id'
+        }
       },
       scoreVisitor: {
         type: Sequelize.INTEGER,
@@ -30,7 +38,11 @@ module.exports = {
         type: Sequelize.STRING
       },
       leagueId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Leagues',
+          key: 'id'
+        }
       },
       refereeId: {
         type: Sequelize.INTEGER

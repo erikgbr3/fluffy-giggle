@@ -10,13 +10,21 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       playerId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Players',
+          key: 'id'
+        }
       },
       score: {
         type: Sequelize.INTEGER
       },
       matchId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Matches',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

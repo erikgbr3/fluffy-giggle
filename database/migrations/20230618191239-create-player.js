@@ -27,11 +27,15 @@ module.exports = {
       cellphone: {
         type: Sequelize.STRING
       },
-      curp: {
+      curp: { 
         type: Sequelize.STRING
       },
       clubId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Clubs',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
