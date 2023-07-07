@@ -42,6 +42,21 @@ db.User = user(sequelize, Sequelize.DataTypes);
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+
+const Suscription = db.Suscription;
+const TableLeague = db.PositionTableLeague;
+
+Suscription.addHook('afterCreate', async (registroOrigen, options) => {
+  try {
+    await TableLeague.create({
+      clubId: registroOrigen.clubId,
+      leagueId: registroOrigen.leagueId,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);

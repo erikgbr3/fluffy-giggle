@@ -1,6 +1,7 @@
 //Detecta el reqyesr e invoca la función.
 
 import db from "@/database/models"
+import posicionadorTabla from "@/database/services/posicionadorTabla";
 
 export default function handler(req, res) {
   switch(req.method){
@@ -39,8 +40,12 @@ const addMatch = async (req, res) => {
     console.log(req.body);
     //Los datos recibidos son guardados
     const matches = await db.Match.create({...req.body});
+    const result = await posicionadorTabla();
+
+    // ToDO con el resultado ????
     res.json({
       matches,
+      result,
       message: "Partido Creado"
     });
   }catch (error){
@@ -74,7 +79,9 @@ const editMatch = async(req, res) => {
         id:id
       }
     })
+    const result = await posicionadorTabla();
     res.json({
+      result,
       message: "El partido fue Actualizado"
     });
   } catch (error) {
@@ -107,6 +114,7 @@ const deleteMatch = async(req, res) =>{
         id: id
       }
     });
+    await PositionTableLeague();
     res.json({
       message: "El partido fue eliminado"
     });
