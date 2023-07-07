@@ -1,5 +1,6 @@
 import db from "database/models";
-export default async function handler(req, res) {
+
+export default async function posicionadorTabla() {
   try {
     // Obtener todos los registros de la tabla de posiciones
     const posiciones = await db.PositionTableLeague.findAll();
@@ -26,6 +27,8 @@ export default async function handler(req, res) {
       let partidosPerdidos = 0;
       let golesFavor = 0;
       let golesContra = 0;
+
+      let actualizados = 0;
 
       for (const resultado of resultadosPartidos) {
         if (resultado.homeTeamId === clubId) {
@@ -64,11 +67,14 @@ export default async function handler(req, res) {
         df: golesFavor - golesContra,
         points: partidosGanados * 3 + partidosEmpatados,
       });
+
+      actualizados++;
     }
 
-    res.status(200).json({ message: 'Tabla de posiciones actualizada' });
+    console.log(`Se actualizaron: ${actualizados}`);
+    return {success: true,  message: 'Tabla de posiciones actualizada' };
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error al actualizar la tabla de posiciones' });
+    return {success: false,  message: 'Error al actualizar la tabla de posiciones' };
   }
 }
