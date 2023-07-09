@@ -13,14 +13,18 @@ export default async function posicionadorTabla() {
       const club = await db.Club.findByPk(clubId);
 
       // Calcular los valores actualizados en función de los resultados de los partidos
-      const resultadosPartidos = await db.Match.findAll({
-        where: {
-          $or: [
-            { homeTeamId: clubId },
-            { visitorTeamId: clubId }
-          ]
-        }
-      });
+      const resultadosPartidos = await Promise.all([
+        db.Match.findAll({
+          where: {
+            homeTeamId: clubId,
+          },
+        }),
+        db.Match.findAll({
+          where: {
+            visitorTeamId: clubId,
+          },
+        }),
+      ]);
 
       let partidosGanados = 0;
       let partidosEmpatados = 0;
@@ -28,34 +32,34 @@ export default async function posicionadorTabla() {
       let golesFavor = 0;
       let golesContra = 0;
 
-      let actualizados = 0;
-
-      for (const resultado of resultadosPartidos) {
-        if (resultado.homeTeamId === clubId) {
-          golesFavor += resultado.scoreHome;
-          golesContra += resultado.scoreVisitor;
-
-          if (resultado.scoreHome > resultado.scoreVisitor) {
-            partidosGanados++;
-          } else if (resultado.scoreHome === resultado.scoreVisitor) {
-            partidosEmpatados++;
-          } else {
-            partidosPerdidos++;
-          }
-        } else {
-          golesFavor += resultado.scoreVisitor;
-          golesContra += resultado.scoreHome;
-
-          if (resultado.scoreVisitor > resultado.scoreHome) {
-            partidosGanados++;
-          } else if (resultado.scoreVisitor === resultado.scoreHome) {
-            partidosEmpatados++;
-          } else {
-            partidosPerdidos++;
+      for (const resultados of resultadosPartidos) {
+        for (const resultado of resultados) {
+          if (resultado.homeTeamId === clubId) {
+            golesFavor += resultado.scoreHome;
+            golesContra += resultado.scoreVisitor;
+      
+            if (resultado.scoreHome > resultado.scoreVisitor) {
+              partidosGanados++;
+            } else if (resultado.scoreHome < resultado.scoreVisitor) {
+              partidosPerdidos++;
+            } else {
+              partidosEmpatados++;
+            }
+          } else if (resultado.visitorTeamId === clubId) {
+            golesFavor += resultado.scoreVisitor;
+            golesContra += resultado.scoreHome;
+      
+            if (resultado.scoreVisitor > resultado.scoreHome) {
+              partidosGanados++;
+            } else if (resultado.scoreVisitor < resultado.scoreHome) {
+              partidosPerdidos++;
+            } else {
+              partidosEmpatados++;
+            }
           }
         }
       }
-
+      
       // Actualizar los valores en la tabla de posiciones
       await posicion.update({
         matchesWon: partidosGanados,
@@ -68,10 +72,9 @@ export default async function posicionadorTabla() {
         points: partidosGanados * 3 + partidosEmpatados,
       });
 
-      actualizados++;
+      
     }
 
-    console.log(`Se actualizaron: ${actualizados}`);
     return {success: true,  message: 'Tabla de posiciones actualizada' };
   } catch (error) {
     console.error(error);
